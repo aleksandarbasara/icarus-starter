@@ -1,0 +1,13 @@
+{{ define "main" }}
+<!-- Feed -->
+<div class="container py-12 mx-auto leading-relaxed">
+        <div class="flex flex-wrap mx-6 lg:mx-64">
+            <div class="w-full">
+                {{ range ( sort (where .Pages "Section" "posts") "Weight" "desc" ) }}
+                    {{ partial "main/post.html" . }}
+                {{ end }}
+            </div>
+          </div>
+        </div>
+    </div>
+{{ end }}

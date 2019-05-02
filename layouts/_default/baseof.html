@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{ partial "head/meta.html" . }}
+    {{ $style := resources.Get "css/global.css" | postCSS (dict "config" "./postcss.config.js")  | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $style.Permalink }}" integrity="{{ $style.Data.Integrity }}">
+</head>
+    <body class="font-sans m-0 antialiased">
+        <div id="main" class="w-full">
+            <header class="bg-gray-900 p-6">
+                {{ partialCached "head/navigation.html" . }}
+                {{ if .IsHome }}
+                    {{ partialCached "head/hero.html" . }}
+                {{ end }}
+            </header>
+            {{ block "main" . }}
+            <!-- The part of the page that begins to differ between templates -->
+            {{ end }}
+            {{ block "footer" . }}
+                {{ partialCached "footer/site-footer.html" . }}
+            {{ end }}
+        </div>
+        {{ $global := resources.Get "js/index.js" }}
+        <script type="text/javascript" src="{{ $global.Permalink }}"></script>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="container py-12 mx-auto leading-relaxed">
+    <div class="flex flex-wrap mx-6 lg:mx-64">
+        <div class="w-full">
+            <div class="rounded overflow-hidden p-6">
+                <img
+                srcset="{{ .Params.image }}?fm=auto&h=448&fit=fill 1x,
+                {{ .Params.image }}?fm=auto&h=448&fit=fill&dpr=2 2x,
+                {{ .Params.image }}?fm=auto&h=448&fit=fill&dpr=3 3x"
+                src="{{ .Params.image }}?fm=auto&h=448&fit=fill"
+                >
+                <h1 class="mt-0 text-2xl md:text-4xl">
+                    {{ .Title }}
+                </h1>
+                {{ .Content | markdownify }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ end }}
